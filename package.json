@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc --build tsconfig.json"
+    "build": "tsc --build tsconfig.json",
+    "types": "npx dts-bundle --name my-demo-lib --main build/Greeter.d.ts --out ./types.d.ts"
   },
   "author": "",
   "license": "ISC",
