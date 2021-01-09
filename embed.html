@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Embedded editor</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 30px;
+      }
+      #container {
+        text-align: center;
+      }
+      h1 {
+        font-size: 1.5em;
+      }
+      h3 {
+        font-size: 1em;
+        margin: 0.5em;
+      }
+      iframe.embed {
+        display: inline-block;
+        width: 60%;
+      }
+      iframe.embed {
+        display: inline-block;
+        border: 1px solid black;
+        border-radius: 5px;
+        resize: both;
+        overflow: hidden;
+        max-width: 90vw;
+        max-height: 90vh;
+        min-width: 60vw;
+        min-height: 60vh;
+        margin: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h1>Embedded Localpen Editors</h1>
+
+      <h3>Empty</h3>
+      <iframe class="embed" src="https://localpen.io/"></iframe>
+
+      <h3>Prefilled</h3>
+      <iframe
+        class="embed"
+        src="https://localpen.io/#https://gist.github.com/hatemhosny/a0a32216df59e53879b7cd83856cdde4"
+      ></iframe>
+    </div>
+  </body>
+</html>
