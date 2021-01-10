@@ -1,0 +1,52 @@
+{
+  "baseUrl": "/localpen",
+  "title": "Greeter demo",
+  "autoupdate": true,
+  "update_delay": 500,
+  "autosave": true,
+  "emmet": true,
+  "autoprefixer": true,
+  "mode": "full",
+  "language": "typescript",
+  "allow_lang_change": true,
+  "markup": {
+    "language": "html",
+    "content": "<button>Greet</button>\r\n<h1></h1>",
+    "contentUrl": "",
+    "selector": ""
+  },
+  "style": {
+    "language": "css",
+    "content": "body {\r\n  text-align: center;\r\n}\r\nbutton {\r\n  margin: 40px;\r\n  padding: 10px;\r\n  font-size: 2em;\r\n}",
+    "contentUrl": "",
+    "selector": ""
+  },
+  "script": {
+    "language": "typescript",
+    "content": "import { Greeter } from \"my-demo-lib\";\r\n\r\nconst greeter = new Greeter();\r\nconst button = document.querySelector(\"button\");\r\nconst h1 = document.querySelector(\"h1\");\r\n\r\nbutton.addEventListener(\"click\", () => {\r\n  h1.innerHTML = greeter.morning();\r\n});\r\n"
+  },
+  "stylesheets": [],
+  "scripts": [],
+  "editor": {
+    "fontSize": 14,
+    "theme": "vs-dark",
+    "formatOnType": false,
+    "tabSize": 2,
+    "lineNumbersMinChars": 3,
+    "minimap": {
+      "enabled": false
+    },
+    "scrollbar": {
+      "useShadows": false
+    },
+    "mouseWheelZoom": true,
+    "automaticLayout": true
+  },
+  "modules": [
+    {
+      "name": "my-demo-lib",
+      "url": "https://hatemhosny.github.io/localpen-examples/build/Greeter.js",
+      "typesUrl": "https://hatemhosny.github.io/localpen-examples/build/types.d.ts"
+    }
+  ]
+}
