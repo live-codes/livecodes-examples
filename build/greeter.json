@@ -1,5 +1,5 @@
 {
-  "baseUrl": "/localpen",
+  "baseUrl": "/livecodes/",
   "title": "Greeter demo",
   "autoupdate": true,
   "update_delay": 500,
@@ -45,8 +45,8 @@
   "modules": [
     {
       "name": "my-demo-lib",
-      "url": "https://hatemhosny.github.io/localpen-examples/build/Greeter.js",
-      "typesUrl": "https://hatemhosny.github.io/localpen-examples/build/types.d.ts"
+      "url": "https://live-codes.github.io/livecodes-examples/build/Greeter.js",
+      "typesUrl": "https://live-codes.github.io/livecodes-examples/build/types.d.ts"
     }
   ]
 }

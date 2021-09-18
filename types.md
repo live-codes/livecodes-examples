@@ -1,6 +1,6 @@
 # Screenshots for typing support for locally defined modules
 
-[read this for details](https://github.com/hatemhosny/localpen#importing-local-modules-with-typescript-types)
+[read this for details](https://github.com/live-codes/livecodes#intellisense)
 
 ### Import the module
 

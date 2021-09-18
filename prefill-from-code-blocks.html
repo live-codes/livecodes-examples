@@ -61,9 +61,9 @@
       }
     </style>
     <script>
-      var localpenUrl = "https://localpen.io/";
+      var livecodesUrl = "https://livecodes.io/";
       var getCode = () =>
-        Array.from(document.querySelectorAll(".localpen pre")).reduce(
+        Array.from(document.querySelectorAll(".livecodes pre")).reduce(
           (url, el) =>
             el.dataset.lang
               ? url +
@@ -72,29 +72,29 @@
                 encodeURIComponent(el.innerHTML) +
                 "&"
               : url,
-          localpenUrl + "?"
+          livecodesUrl + "?"
         );
 
       window.addEventListener("load", () => {
         document.querySelector("iframe.embed.by-params").src = getCode();
         document.querySelector(
           "iframe.embed.by-url"
-        ).src = `${localpenUrl}?mode=embed&url#${location.href}`;
+        ).src = `${livecodesUrl}?mode=embed&url#${location.href}`;
       });
     </script>
   </head>
   <body>
     <div id="container">
       <h1>
-        <a href="https://github.com/hatemhosny/localpen">LocalPen</a> Editors:
+        <a href="https://github.com/live-codes/livecodes">LiveCodes</a> Editors:
         Auto-Prefill from Code Blocks
       </h1>
       <a
         href="#"
         target="_blank"
         class="external"
-        onclick="this.href=`${localpenUrl}?url#${location.href}`"
-        >Edit in localpen (url)</a
+        onclick="this.href=`${livecodesUrl}?url#${location.href}`"
+        >Edit in LiveCodes (url)</a
       >
       -
       <a
@@ -102,10 +102,10 @@
         target="_blank"
         class="external"
         onclick="this.href=`${getCode()}`"
-        >Edit in localpen (query params)</a
+        >Edit in LiveCodes (query params)</a
       >
       <h3>HTML</h3>
-      <code class="localpen">
+      <code class="livecodes">
         <pre data-lang="html">
 This code is in HTML code blocks
 &lt;div&gt;With &lt;strong&gt;HTML&lt;/strong&gt; &lt;i&gt;tags&lt;/i&gt;&lt;/div&gt;
@@ -113,7 +113,7 @@ This code is in HTML code blocks
         >
       </code>
       <h3>CSS</h3>
-      <code class="localpen">
+      <code class="livecodes">
         <pre data-lang="css">
 body {
   text-align: center;
@@ -125,7 +125,7 @@ body {
         >
       </code>
       <h3>Typescript</h3>
-      <code class="localpen">
+      <code class="livecodes">
         <pre data-lang="typescript">
 const p = document.createElement('p');
 p.classList.add('blue');
