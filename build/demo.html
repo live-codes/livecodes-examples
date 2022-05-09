@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LiveCodes API Usage Demo</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        font: 0.9em sans-serif;
+        justify-content: center;
+      }
+      h1 {
+        text-align: center;
+        font-size: 1.5em;
+        color: rgb(72, 72, 72);
+      }
+      #container {
+        border: 1px solid black;
+        border-radius: 5px;
+        height: 60vh;
+        min-height: 250px;
+        width: 80%;
+        margin: auto;
+      }
+
+      #container iframe {
+        border: 0;
+        border-radius: 5px;
+        height: 100%;
+        width: 100%;
+      }
+      #controls {
+        list-style: none;
+        display: flex;
+        gap: 1em;
+        justify-content: center;
+        margin: 1em;
+        padding: 0;
+      }
+      #show-controls {
+        margin: auto;
+      }
+      #show-panel,
+      #show-btn {
+        margin: 0 1em;
+      }
+      #text {
+        height: 60vh;
+        margin: 1em auto;
+        width: 80%;
+      }
+      #footer {
+        margin: 1em;
+        text-align: center;
+      }
+      #footer a {
+        color: rgb(72, 72, 72);
+        font-size: 0.9em;
+        margin: 1em;
+        text-decoration: none;
+      }
+      #footer a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>LiveCodes API Demo</h1>
+    <div id="container"></div>
+    <ul id="controls">
+      <li><a href="#" data-command="load">load</a></li>
+      <li><a href="#" data-command="run">run</a></li>
+      <li><a href="#" data-command="format">format</a></li>
+      <li><a href="#" data-command="getShareUrl">getShareUrl</a></li>
+      <li>
+        <a href="#" data-command="getShareUrl (short)">getShareUrl (short)</a>
+      </li>
+      <li><a href="#" data-command="getConfig">getConfig</a></li>
+      <li><a href="#" data-command="setConfig">setConfig</a></li>
+      <li><a href="#" data-command="getCode">getCode</a></li>
+      <li><a href="#" data-command="runTests">runTests</a></li>
+      <li><a href="#" data-command="onChange">add onChange</a></li>
+      <li><a href="#" data-command="destroy">destroy</a></li>
+    </ul>
+    <div id="show-controls">
+      <select name="show-panel" id="show-panel">
+        <option>markup</option>
+        <option>style</option>
+        <option>script</option>
+        <option>result</option>
+        <option>console</option>
+        <option>compiled</option>
+        <option>tests</option>
+      </select>
+      <input type="checkbox" name="show-full" id="show-full" />
+      <label for="show-full">full</label>
+      <button id="show-btn">show</button>
+    </div>
+    <textarea name="text" id="text"></textarea>
+    <div id="footer">
+      <a href="https://livecodes.io">LiveCodes</a>
+      <a href="https://livecodes.io/web/docs/advanced/api">API Documentation</a>
+      <a
+        href="https://github.com/live-codes/livecodes-examples/blob/gh-pages/build/api-demo.html"
+        >Page Source</a
+      >
+    </div>
+    <script type="module">
+      import { playground } from "https://dev.livecodes.io/lib/livecodes.esm.js";
+      const options = {
+        appUrl: "https://dev.livecodes.io/",
+        template: "jest-react",
+        loading: "click",
+      };
+      playground("#container", options).then((api) => {
+        window.api = api;
+
+        const setTextarea = (value = "", append = false) => {
+          if (append) {
+            document.querySelector("#text").innerHTML += "\n\n" + value;
+          } else {
+            document.querySelector("#text").innerHTML = value;
+          }
+        };
+
+        document
+          .querySelector('[data-command="load"]')
+          .addEventListener("click", async (e) => {
+            e.preventDefault();
+            setTextarea("executing: load()");
+            try {
+              await api.load();
+              setTextarea("executed: load()", true);
+            } catch (error) {
+              setTextarea(error.message || error, true);
+            }
+          });
+
+        document
+          .querySelector('[data-command="run"]')
+          .addEventListener("click", async (e) => {
+            e.preventDefault();
+            setTextarea("executing: run()");
+            try {
+              await api.run();
+              setTextarea("executed: run()", true);
+            } catch (error) {
+              setTextarea(error.message || error, true);
+            }
+          });
+
+        document
+          .querySelector('[data-command="format"]')
+          .addEventListener("click", async (e) => {
+            e.preventDefault();
+            setTextarea("executing: format()");
+            try {
+              await api.format();
+              setTextarea("executed: format()", true);
+            } catch (error) {
+              setTextarea(error.message || error, true);
+            }
+          });
+
+        document
+          .querySelector('[data-command="getShareUrl"]')
+          .addEventListener("click", async (e) => {
+            e.preventDefault();
+            setTextarea("executing: getShareUrl()");
+            try {
+              const shareUrl = await api.getShareUrl();
+              setTextarea(shareUrl, true);
+            } catch (error) {
+              setTextarea(error.message || error, true);
+            }
+          });
+
+        document
+          .querySelector('[data-command="getShareUrl (short)"]')
+          .addEventListener("click", async (e) => {
+            e.preventDefault();
+            setTextarea("executing: getShareUrl(true)");
+            try {
+              const shareUrl = await api.getShareUrl(true);
+              setTextarea(shareUrl, true);
+            } catch (error) {
+              setTextarea(error.message || error, true);
+            }
+          });
+
+        document
+          .querySelector('[data-command="getConfig"]')
+          .addEventListener("click", async (e) => {
+            e.preventDefault();
+            setTextarea("executing: getConfig()");
+            try {
+              const config = await api.getConfig();
+              setTextarea(JSON.stringify(config, null, 2), true);
+            } catch (error) {
+              setTextarea(error.message || error, true);
+            }
+          });
+
+        document
+          .querySelector('[data-command="setConfig"]')
+          .addEventListener("click", async (e) => {
+            e.preventDefault();
+            try {
+              const config = {
+                markup: {
+                  language: "html",
+                  content: "Hello World!",
+                },
+              };
+              setTextarea(
+                `executing: setConfig(${JSON.stringify(config, null, 2)})`
+              );
+              await api.setConfig(config);
+              setTextarea("executed: setConfig()", true);
+            } catch (error) {
+              setTextarea(error.message || error, true);
+            }
+          });
+
+        document
+          .querySelector('[data-command="getCode"]')
+          .addEventListener("click", async (e) => {
+            e.preventDefault();
+            setTextarea("executing: getCode()");
+            try {
+              const code = await api.getCode();
+              setTextarea(JSON.stringify(code, null, 2), true);
+            } catch (error) {
+              setTextarea(error.message || error, true);
+            }
+          });
+
+        document
+          .querySelector('[data-command="runTests"]')
+          .addEventListener("click", async (e) => {
+            e.preventDefault();
+            setTextarea("executing: runTests()");
+            try {
+              const testResults = await api.runTests();
+              setTextarea(JSON.stringify(testResults, null, 2), true);
+            } catch (error) {
+              setTextarea(error.message || error, true);
+            }
+          });
+
+        let watcher;
+        const onChangeLink = document.querySelector(
+          '[data-command="onChange"]'
+        );
+        onChangeLink.addEventListener("click", async (e) => {
+          e.preventDefault();
+          try {
+            if (!watcher) {
+              setTextarea("watching changes...");
+              watcher = api.onChange((output) => {
+                setTextarea("Changes detected:");
+                setTextarea(JSON.stringify(output, null, 2), true);
+              });
+              onChangeLink.innerText = "remove onChange";
+            } else {
+              watcher?.remove();
+              watcher = null;
+              setTextarea("stopped watching changes...");
+              onChangeLink.innerText = "add onChange";
+            }
+          } catch (error) {
+            setTextarea(error.message || error, true);
+          }
+        });
+
+        document
+          .querySelector('[data-command="destroy"]')
+          .addEventListener("click", async (e) => {
+            e.preventDefault();
+            setTextarea("executing: destroy()");
+            try {
+              await api.destroy();
+              setTextarea("executed: destroy()", true);
+            } catch (error) {
+              setTextarea(error.message || error, true);
+            }
+          });
+
+        document
+          .querySelector("#show-btn")
+          .addEventListener("click", async (e) => {
+            e.preventDefault();
+            const panel = document.querySelector("#show-panel").value;
+            const full = document.querySelector("#show-full").checked;
+            setTextarea(`executing: show(${panel}, { full: ${full} })`);
+            try {
+              await api.show(panel, { full });
+              setTextarea(`executed: show(${panel}, { full: ${full} })`, true);
+            } catch (error) {
+              setTextarea(error.message || error, true);
+            }
+          });
+      });
+    </script>
+  </body>
+</html>
