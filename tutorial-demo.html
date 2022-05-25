@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LiveCodes Tutorial Demo</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        font: 0.9em sans-serif;
+        justify-content: center;
+        width: 100vw;
+      }
+      h1 {
+        text-align: center;
+        font-size: 1.5em;
+        color: rgb(72, 72, 72);
+      }
+      #container {
+        border: 1px solid black;
+        border-radius: 5px;
+        height: 60vh;
+        min-height: 250px;
+        width: 80%;
+        margin: auto;
+      }
+
+      #container iframe {
+        border: 0;
+        border-radius: 5px;
+        height: 100%;
+        width: 100%;
+      }
+      #controls {
+        list-style: none;
+        display: flex;
+        gap: 1em;
+        justify-content: center;
+        flex-wrap: wrap;
+        max-width: 100%;
+        margin: 1em;
+        padding: 0;
+      }
+      #controls a {
+        width: 15em;
+        height: 2em;
+        background-color: rgb(243, 243, 243);
+        border: 1px solid grey;
+        border-radius: 2px;
+        text-decoration: none;
+        color: darkslategrey;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #footer {
+        margin: 1em;
+        text-align: center;
+      }
+      #footer a {
+        color: rgb(72, 72, 72);
+        font-size: 0.9em;
+        margin: 1em;
+        text-decoration: none;
+      }
+      #footer a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>LiveCodes Tutorial Demo</h1>
+    <div id="container"></div>
+    <div id="controls">
+      <a href="#">Start Tutorial</a>
+    </div>
+
+    <div id="footer">
+      <a href="https://livecodes.io">LiveCodes</a>
+      <a href="https://livecodes.io/web/docs/advanced/api">API Documentation</a>
+      <a
+        href="https://github.com/live-codes/livecodes-examples/blob/gh-pages/api-demo.html"
+        >Page Source</a
+      >
+    </div>
+    <script type="module">
+      import { createPlayground } from "https://dev.livecodes.io/lib/livecodes.esm.js";
+      const options = {
+        appUrl: "https://dev.livecodes.io/",
+      };
+      createPlayground("#container", options).then((playground) => {
+        const steps = [
+          {
+            panel: "markup",
+            position: { line: 2, column: 20 },
+            config: {
+              markup: {
+                language: "html",
+                content: '<h1>Hello \n  <span id="title">World</span>!\n</h1>',
+              },
+            },
+          },
+          {
+            panel: "style",
+            position: { line: 2, column: 10 },
+            config: {
+              markup: {
+                language: "html",
+                content: '<h1>Hello \n  <span id="title">World</span>!\n</h1>',
+              },
+              style: {
+                language: "css",
+                content: "#title {\n  color: blue;\n}",
+              },
+            },
+          },
+          {
+            panel: "script",
+            position: { line: 1, column: 19 },
+            config: {
+              markup: {
+                language: "html",
+                content: '<h1>Hello \n  <span id="title">World</span>!\n</h1>',
+              },
+              style: {
+                language: "css",
+                content: "#title {\n  color: blue;\n}",
+              },
+              script: {
+                language: "javascript",
+                content:
+                  'const newTitle = "LiveCodes";\ndocument.querySelector("#title").textContent = newTitle;',
+              },
+            },
+          },
+          {
+            panel: "console",
+            config: {
+              activeEditor: "script",
+              markup: {
+                language: "html",
+                content: '<h1>Hello \n  <span id="title">World</span>!\n</h1>',
+              },
+              style: {
+                language: "css",
+                content: "#title {\n  color: blue;\n}",
+              },
+              script: {
+                language: "javascript",
+                content:
+                  'const newTitle = "LiveCodes";\ndocument.querySelector("#title").textContent = newTitle;\nconsole.log(newTitle);',
+              },
+            },
+          },
+        ];
+        let step = 0;
+        const link = document.querySelector("#controls a");
+        link.addEventListener("click", async (ev) => {
+          ev.preventDefault();
+          if (step < steps.length) {
+            const currentStep = steps[step];
+            await playground.setConfig(currentStep.config);
+            await playground.show(currentStep.panel, {
+              full: false,
+              ...currentStep.position,
+            });
+            if (step < steps.length - 1) {
+              link.textContent = "Next";
+            } else {
+              link.textContent = "Final Result";
+            }
+            step += 1;
+          } else {
+            await playground.show("result", { full: true });
+            step = 0;
+            link.textContent = "Restart Tutorial";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

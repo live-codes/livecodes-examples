@@ -112,14 +112,14 @@
       >
     </div>
     <script type="module">
-      import { playground } from "https://dev.livecodes.io/lib/livecodes.esm.js";
+      import { createPlayground } from "https://dev.livecodes.io/lib/livecodes.esm.js";
       const options = {
         appUrl: "https://dev.livecodes.io/",
         template: "jest-react",
         loading: "click",
       };
-      playground("#container", options).then((api) => {
-        window.api = api;
+      createPlayground("#container", options).then((playground) => {
+        window.playground = playground;
 
         const setTextarea = (value = "", append = false) => {
           if (append) {
@@ -135,7 +135,7 @@
             e.preventDefault();
             setTextarea("executing: load()");
             try {
-              await api.load();
+              await playground.load();
               setTextarea("executed: load()", true);
             } catch (error) {
               setTextarea(error.message || error, true);
@@ -148,7 +148,7 @@
             e.preventDefault();
             setTextarea("executing: run()");
             try {
-              await api.run();
+              await playground.run();
               setTextarea("executed: run()", true);
             } catch (error) {
               setTextarea(error.message || error, true);
@@ -161,7 +161,7 @@
             e.preventDefault();
             setTextarea("executing: format()");
             try {
-              await api.format();
+              await playground.format();
               setTextarea("executed: format()", true);
             } catch (error) {
               setTextarea(error.message || error, true);
@@ -174,7 +174,7 @@
             e.preventDefault();
             setTextarea("executing: getShareUrl()");
             try {
-              const shareUrl = await api.getShareUrl();
+              const shareUrl = await playground.getShareUrl();
               setTextarea(shareUrl, true);
             } catch (error) {
               setTextarea(error.message || error, true);
@@ -187,7 +187,7 @@
             e.preventDefault();
             setTextarea("executing: getShareUrl(true)");
             try {
-              const shareUrl = await api.getShareUrl(true);
+              const shareUrl = await playground.getShareUrl(true);
               setTextarea(shareUrl, true);
             } catch (error) {
               setTextarea(error.message || error, true);
@@ -200,7 +200,7 @@
             e.preventDefault();
             setTextarea("executing: getConfig()");
             try {
-              const config = await api.getConfig();
+              const config = await playground.getConfig();
               setTextarea(JSON.stringify(config, null, 2), true);
             } catch (error) {
               setTextarea(error.message || error, true);
@@ -221,7 +221,7 @@
               setTextarea(
                 `executing: setConfig(${JSON.stringify(config, null, 2)})`
               );
-              await api.setConfig(config);
+              await playground.setConfig(config);
               setTextarea("executed: setConfig()", true);
             } catch (error) {
               setTextarea(error.message || error, true);
@@ -234,7 +234,7 @@
             e.preventDefault();
             setTextarea("executing: getCode()");
             try {
-              const code = await api.getCode();
+              const code = await playground.getCode();
               setTextarea(JSON.stringify(code, null, 2), true);
             } catch (error) {
               setTextarea(error.message || error, true);
@@ -247,7 +247,7 @@
             e.preventDefault();
             setTextarea("executing: runTests()");
             try {
-              const testResults = await api.runTests();
+              const testResults = await playground.runTests();
               setTextarea(JSON.stringify(testResults, null, 2), true);
             } catch (error) {
               setTextarea(error.message || error, true);
@@ -263,7 +263,7 @@
           try {
             if (!watcher) {
               setTextarea("watching changes...");
-              watcher = api.onChange((output) => {
+              watcher = playground.onChange((output) => {
                 setTextarea("Changes detected:");
                 setTextarea(JSON.stringify(output, null, 2), true);
               });
@@ -285,7 +285,7 @@
             e.preventDefault();
             setTextarea("executing: destroy()");
             try {
-              await api.destroy();
+              await playground.destroy();
               setTextarea("executed: destroy()", true);
             } catch (error) {
               setTextarea(error.message || error, true);
@@ -300,7 +300,7 @@
             const full = document.querySelector("#show-full").checked;
             setTextarea(`executing: show(${panel}, { full: ${full} })`);
             try {
-              await api.show(panel, { full });
+              await playground.show(panel, { full });
               setTextarea(`executed: show(${panel}, { full: ${full} })`, true);
             } catch (error) {
               setTextarea(error.message || error, true);
