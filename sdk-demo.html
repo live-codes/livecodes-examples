@@ -4,14 +4,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LiveCodes API Usage Demo</title>
+    <title>LiveCodes SDK Demo</title>
     <style>
       body {
         display: flex;
         flex-direction: column;
         font: 0.9em sans-serif;
         justify-content: center;
-        width: 100vw;
+        margin: 10px 5%;
       }
       h1 {
         text-align: center;
@@ -19,19 +19,8 @@
         color: rgb(72, 72, 72);
       }
       #container {
-        border: 1px solid black;
-        border-radius: 5px;
         height: 60vh;
-        min-height: 250px;
-        width: 80%;
         margin: auto;
-      }
-
-      #container iframe {
-        border: 0;
-        border-radius: 5px;
-        height: 100%;
-        width: 100%;
       }
       #controls {
         list-style: none;
@@ -71,7 +60,7 @@
     </style>
   </head>
   <body>
-    <h1>LiveCodes API Demo</h1>
+    <h1>LiveCodes SDK Demo</h1>
     <div id="container"></div>
     <ul id="controls">
       <li><a href="#" data-command="load">load</a></li>
@@ -105,14 +94,14 @@
     <textarea name="text" id="text" wrap="off"></textarea>
     <div id="footer">
       <a href="https://livecodes.io">LiveCodes</a>
-      <a href="https://livecodes.io/web/docs/advanced/api">API Documentation</a>
+      <a href="https://livecodes.io/docs/sdk">SDK Documentation</a>
       <a
-        href="https://github.com/live-codes/livecodes-examples/blob/gh-pages/api-demo.html"
+        href="https://github.com/live-codes/livecodes-examples/blob/gh-pages/sdk-demo.html"
         >Page Source</a
       >
     </div>
     <script type="module">
-      import { createPlayground } from "https://dev.livecodes.io/lib/livecodes.esm.js";
+      import { createPlayground } from "https://dev.livecodes.io/sdk/livecodes.js";
       const options = {
         appUrl: "https://dev.livecodes.io/",
         template: "jest-react",
