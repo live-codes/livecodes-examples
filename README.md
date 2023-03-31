@@ -7,7 +7,7 @@
   [Demo](https://live-codes.github.io/livecodes-examples/prefill-from-code-blocks.html) - [Source](https://github.com/live-codes/livecodes-examples/blob/gh-pages/prefill-from-code-blocks.html)
 
 - SDK demo:
-  [Demo](https://live-codes.github.io/livecodes-examples/api-demo.html) - [Source](https://github.com/live-codes/livecodes-examples/blob/gh-pages/api-demo.html)
+  [Demo](https://live-codes.github.io/livecodes-examples/sdk-demo.html) - [Source](https://github.com/live-codes/livecodes-examples/blob/gh-pages/sdk-demo.html)
 
 - Tutorial demo:
   [Demo](https://live-codes.github.io/livecodes-examples/tutorial-demo.html) - [Source](https://github.com/live-codes/livecodes-examples/blob/gh-pages/tutorial-demo.html)
